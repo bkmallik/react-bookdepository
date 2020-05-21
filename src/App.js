@@ -1,25 +1,56 @@
 import React from 'react';
-import logo from './logo.svg';
+import { Route, Link, Switch, BrowserRouter as Router } from 'react-router-dom' 
 import './App.css';
+
+// BOOTSTRAP JQUERY
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'mdbootstrap/css/mdb.min.css';
+
+import $ from 'jquery';
+import Popper from 'popper.js';
+import 'bootstrap/dist/js/bootstrap.min';
+// BOOTSTRAP JQUERY
+
+import ReactNotifications from 'react-notifications-component';
+
+import {ProtectedRoute} from './protected.route'
+
+import Header from './includes/Header'
+
+
+import Home from './pages/Home'
+import About from './pages/About'
+import Contact from './pages/Contact'
+import Register from './pages/Register'
+import Login from './pages/Login'
+
+import UserHome from './pages/user/UserHome'
+
+
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+    <ReactNotifications />
+    <Router>
+      <Switch>
+                <Route exact path="/" component={Home} />
+                <Route exact path="/about" component={About} />
+                <Route exact path="/contact" component={Contact} />
+                <Route exact path="/login" component={Login} />
+                <Route exact path="/register" component={Register} />
+
+                <ProtectedRoute exact path="/userhome" component={UserHome} />
+
+
+                <Route path="*" component={() => "404 Page NOT FOUND"} />
+
+                
+      </Switch>
+    </Router>
+    </>
+
+
   );
 }
 
