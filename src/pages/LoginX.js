@@ -34,6 +34,11 @@ export default class Login extends Component {
     }
 
     handleSubmit = e =>{
+
+        // const history = createHistory();
+
+        // history.push('/welcome');
+
         $('#logBtn').hide();
         $('#logLoader').show()
         e.preventDefault();
@@ -42,16 +47,11 @@ export default class Login extends Component {
             password: this.state.password,
             email: this.state.email,
         })
-        .then((rr)=>{
-            console.log(rr.data.msg)
-
-            if(rr.data.msg == 'success'){
-                   localStorage.setItem('userlogin', 'true');
-                   localStorage.setItem('userEmail', this.state.email);
-                    this.setState({
-                        loginshow:false
-                    })
-                    store.addNotification({
+        .then(function (response) {
+            this.props.history.push(`/userhome/`, null);
+             if(response.data.msg == 'success'){
+                    
+                store.addNotification({
                     title: 'Success',
                     message: 'Welcome to you.',
                     type: 'success',                         // 'default', 'success', 'info', 'warning'
@@ -63,10 +63,17 @@ export default class Login extends Component {
                       duration: 3000 
                     }
                   })
-            }else{
-                    store.addNotification({
+            
+                   localStorage.setItem('userlogin', 'true');
+                   localStorage.setItem('userEmail', this.state.email);
+                   this.setState({
+                       loginshow:false
+                   })
+            
+             }else{
+                store.addNotification({
                     title: 'Failed',
-                    message: rr.data.msg,
+                    message: response.data.msg,
                     type: 'danger',                         // 'default', 'success', 'info', 'warning'
                     container: 'top-right',                // where to position the notifications
                     animationIn: ["animated", "flash"],     // animate.css classes that's applied
@@ -78,73 +85,19 @@ export default class Login extends Component {
                   })
                   $('#logBtn').show();
                   $('#logLoader').hide()
-            }
-
-        })
-        // .then(function (response) {
-
-
-        //     const response = {
-        //         data: {
-        //           masg: "success",
-        //         }
-        //       }
-
-        //       alert(123);
-
-        //     //         localStorage.setItem('userlogin', 'true');
-        //     //        localStorage.setItem('userEmail', this.state.email);
-        //     // this.setState({
-        //     //             loginshow:false
-        //     //         })
-        //     // alert(123)
-
-        //     //  if(response.data.msg == 'success'){
-
-        //     //     this.setState({
-        //     //         loginshow:false
-        //     //     })
-                    
-        //     //     store.addNotification({
-        //     //         title: 'Success',
-        //     //         message: 'Welcome to you.',
-        //     //         type: 'success',                         // 'default', 'success', 'info', 'warning'
-        //     //         container: 'top-right',                // where to position the notifications
-        //     //         animationIn: ["animated", "fadeIn"],     // animate.css classes that's applied
-        //     //         animationOut: ["animated", "fadeOut"],   // animate.css classes that's applied
-        //     //         showIcon:true,
-        //     //         dismiss: {
-        //     //           duration: 3000 
-        //     //         }
-        //     //       })
-            
-        //     //        localStorage.setItem('userlogin', 'true');
-        //     //        localStorage.setItem('userEmail', this.state.email);
-                   
-                   
-            
-        //     //  }else{
-        //     //     store.addNotification({
-        //     //         title: 'Failed',
-        //     //         message: response.data.msg,
-        //     //         type: 'danger',                         // 'default', 'success', 'info', 'warning'
-        //     //         container: 'top-right',                // where to position the notifications
-        //     //         animationIn: ["animated", "flash"],     // animate.css classes that's applied
-        //     //         animationOut: ["animated", "fadeOut"],   // animate.css classes that's applied
-        //     //         showIcon:true,
-        //     //         dismiss: {
-        //     //           duration: 3000 
-        //     //         }
-        //     //       })
-        //     //       $('#logBtn').show();
-        //     //       $('#logLoader').hide()
-        //     //  }
+             }
              
-        // })
+        })
         .catch(function (error) {
             console.log(error);
-        });                
+        });
+                
     }
+
+    // saySomething() {
+    //     const history = createHistory();
+    //     history.push('/welcome');
+    // }
 
     render() {
 
@@ -184,6 +137,7 @@ export default class Login extends Component {
                                     <a href>Register</a>
                                 </p>
                                 </form>
+                                <button onClick={this.saySomething}>Click</button>
                             {/* Default form login */}
                         </div>
                     </section>
