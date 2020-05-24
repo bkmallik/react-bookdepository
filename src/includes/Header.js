@@ -68,6 +68,9 @@ export default class Header extends Component {
                     
                             <ul className="navbar-nav">
                             <li className="nav-item">
+                            <NavLink exact  to="/userhome" className="nav-link" activeClassName="active">Dashboard</NavLink>
+                            </li>
+                            <li className="nav-item">
                             <NavLink exact onClick={this.handleSubmit}  to="/login" className="nav-link" activeClassName="active">Logout</NavLink>
                             </li>
                             </ul>

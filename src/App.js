@@ -14,6 +14,8 @@ import 'bootstrap/dist/js/bootstrap.min';
 import ReactNotifications from 'react-notifications-component';
 
 import {ProtectedRoute} from './protected.route'
+import {ProtectedRouteAdmin} from './protected.route.admin'
+
 
 import Header from './includes/Header'
 
@@ -25,6 +27,9 @@ import Register from './pages/Register'
 import Login from './pages/Login'
 
 import UserHome from './pages/user/UserHome'
+
+import AdminLogin from './pages/admin/AdminLogin'
+import AdminHome from './pages/admin/AdminHome'
 
 
 
@@ -41,6 +46,12 @@ function App() {
                 <Route exact path="/register" component={Register} />
 
                 <ProtectedRoute exact path="/userhome" component={UserHome} />
+
+
+
+                <ProtectedRouteAdmin exact path="/adminhome" component={AdminHome} />
+                <Route exact path="/adminlogin" component={AdminLogin} />
+
 
 
                 <Route path="*" component={() => "404 Page NOT FOUND"} />
