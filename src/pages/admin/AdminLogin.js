@@ -31,7 +31,7 @@ export default class AdminLogin extends Component {
         })
         .then((rr)=>{
             if(rr.data.msg == 'success'){
-
+                alert('Success');
             }else{
                 store.addNotification({
                     title: 'Failed',
