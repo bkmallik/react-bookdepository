@@ -7,3 +7,8 @@
 .active{
   background-color: #007bffa6;
 }
+.nav {
+  background-color: lightgray;
+  padding: 15px;
+  border-radius: 5px;
+}

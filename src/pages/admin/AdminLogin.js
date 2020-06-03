@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import axios from 'axios'
+import { Route, Redirect } from "react-router-dom";
+
 
 import { store } from 'react-notifications-component';
 import 'react-notifications-component/dist/theme.css';
@@ -31,7 +33,10 @@ export default class AdminLogin extends Component {
         })
         .then((rr)=>{
             if(rr.data.msg == 'success'){
-                alert('Success');
+                // alert('Success');
+                localStorage.setItem('adminlogin', 'true');
+                this.props.history.push(`/adminhome`, null);
+
             }else{
                 store.addNotification({
                     title: 'Failed',
