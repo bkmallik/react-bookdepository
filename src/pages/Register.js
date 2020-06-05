@@ -90,10 +90,6 @@ export default class Register extends Component {
             loginSuccess:true
       })
 
-
-
-
-
         //FORM SUBMIT
         }
 

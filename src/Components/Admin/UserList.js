@@ -24,12 +24,15 @@ export default class UserList extends Component {
             const peoples = res.data
             // console.log(res.data)
             this.setState({ people:peoples,loading:true })
-
         })
     }
 
-    render() {
+    handleDelete = param => e => {
+        
+        alert(param)
+    };
 
+    render() {
         return (
             <>
             <div className="container mt-5 mb-5">
@@ -65,7 +68,7 @@ export default class UserList extends Component {
                                     <td>{peps.fname} {peps.lname}</td>
                                     <td>{peps.email}</td>
                                     <td>{peps.phone}</td>
-                                    <td><NavLink exact  to={`/userdetails/${peps.id}`} className="text-info">Edit</NavLink>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="" className="text-danger">Delete</a></td>
+                                    <td><NavLink exact to={`/userdetails/${peps.id}`} className="text-info">Edit</NavLink>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<p onClick={this.handleDelete(peps.id)} style={{cursor: 'pointer'}} className="text-danger">Delete</p></td>
                                 </tr>)}
                                 </tbody>
                                 </>

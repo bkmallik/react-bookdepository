@@ -5,54 +5,58 @@ import axios from 'axios'
 
 export default class AdminUserDetails extends Component {
 
-    state={
-        id:this.props.match.params.id,
-        user:[]
+    constructor(props){
+        super(props)
+        this.state={
+            id:this.props.match.params.id,
+            user:[],
+        }
+        this.handleChange = this.handleChange.bind(this);
     }
 
     componentDidMount(){
         var id=this.state.id;
         axios.get(`https://www.learningall.me/api/bookdepository-userdetails/${id}/edit`)
         .then(res => {
-            
+        
             const peoples = res.data
             // console.log(res.data)
             this.setState({ user:peoples,loading:true })
-
-           
-
-
         })
-        console.log(this.state.user)
     }
+
+
+    handleChange(e){
+        this.setState({
+            [e.target.name]: e.target.value
+        })
+    }
+
 
     render() {
         return (
         <>
             <div className="container mt-5 mb-5">
                 <AdminHeader />
-                <h2>Hello from user details</h2>
-                {/* {this.props.match.params.id}     */}
-                {console.log(this.state.id)}
+                <h2>Edit {this.state.user.fname}</h2>
             </div>
             <div className="container mt-5 mb-5 col-md-4">
-                {this.state.id}
             <form>
                 <div className="form-group">
-                    <label htmlFor="exampleInputEmail1">Email address</label>
-                    <input type="email" className="form-control" value={this.state.user.email} />
+                    <label>Email address</label>
+                    <input type="email" className="form-control" value={this.state.user.email} onChange={this.handleChange} />
                 </div>
                 <div className="form-group">
-                    <label htmlFor="exampleInputEmail1">Phone</label>
-                    <input type="text" className="form-control" value={this.state.user.phone} />
+                    <label>Phone</label>
+                    <input type="text" className="form-control" value={this.state.user.phone} onChange={this.handleChange} />
                 </div>
                 <div className="form-group">
-                    <label htmlFor="exampleInputEmail1">First Name</label>
-                    <input type="text" className="form-control" value={this.state.user.fname} />
+                    <label>First Name</label>
+                    <input type="text" className="form-control" value={this.state.user.fname} onChange={this.handleChange} />
                 </div>
                 <div className="form-group">
-                    <label htmlFor="exampleInputEmail1">Last Name</label>
-                    <input type="text" className="form-control" value={this.state.user.lname} />
+                    <label>Last Name</label>
+                    <input type="text" className="form-control" value={this.state.user.lname} onChange={this.handleChange} />
                 </div>
                 <button type="submit" className="btn btn-primary">Update</button>
             </form>
