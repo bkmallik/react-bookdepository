@@ -32,6 +32,7 @@ import AdminLogin from './pages/admin/AdminLogin'
 import AdminHome from './pages/admin/AdminHome'
 import AdminUser from './pages/admin/AdminUser'
 import AdminUserDetails from './pages/admin/AdminUserDetails';
+import AdminUserCreate from './pages/admin/AdminUserCreate';
 
 
 
@@ -54,6 +55,8 @@ function App() {
                 <ProtectedRouteAdmin exact path="/adminhome" component={AdminHome} />
                 <ProtectedRouteAdmin exact path="/userlist" component={AdminUser} />
                 <ProtectedRouteAdmin path="/userdetails/:id" component={AdminUserDetails} />
+                <ProtectedRouteAdmin path="/user-create" component={AdminUserCreate} />
+
                 <Route exact path="/adminlogin" component={AdminLogin} />
 
 

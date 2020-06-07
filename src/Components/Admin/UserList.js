@@ -1,21 +1,23 @@
 import React, { Component } from 'react'
 import AdminHeader from '../../includes/AdminHeader'
 import axios from 'axios'
-import {
-    BrowserRouter as Router,
-    Switch,
-    Route,
-    Link,
-    NavLink,
-    Redirect
-  } from "react-router-dom";
+  import { NavLink,withRouter,useLocation  } from 'react-router-dom'
+  
 
+import { store } from 'react-notifications-component';
+import 'react-notifications-component/dist/theme.css';
+import 'animate.css';
 
 export default class UserList extends Component {
 
-    state={
-        people:[],
-        loading:false
+    
+
+    constructor(props){
+        super(props)
+        this.state={
+            people:[],
+            loading:false
+        }
     }
 
     componentDidMount(){
@@ -27,11 +29,7 @@ export default class UserList extends Component {
         })
     }
 
-    handleDelete = param => e => {
-        
-        alert(param)
-    };
-
+    
     render() {
         return (
             <>
@@ -39,6 +37,8 @@ export default class UserList extends Component {
             <AdminHeader />
             <br/><br/>
             <h3 className="text-center">UserList</h3>
+            <NavLink exact to={'user-create'} className="btn btn-info float-right">Create</NavLink>
+
                 <table class="table">
                     <thead class="black white-text">
                         <tr>
@@ -68,7 +68,7 @@ export default class UserList extends Component {
                                     <td>{peps.fname} {peps.lname}</td>
                                     <td>{peps.email}</td>
                                     <td>{peps.phone}</td>
-                                    <td><NavLink exact to={`/userdetails/${peps.id}`} className="text-info">Edit</NavLink>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<p onClick={this.handleDelete(peps.id)} style={{cursor: 'pointer'}} className="text-danger">Delete</p></td>
+                                    <td><NavLink exact to={`/userdetails/${peps.id}`} className="text-info">Edit</NavLink></td>
                                 </tr>)}
                                 </tbody>
                                 </>
